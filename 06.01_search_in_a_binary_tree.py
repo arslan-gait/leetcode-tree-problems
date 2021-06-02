@@ -20,11 +20,13 @@ class Solution:
     # time complexity  - O(height(root))
     def searchBST2(self, root: TreeNode, val: int) -> TreeNode:
         cur = root
-        while cur:
-            if cur.val == val:
-                return cur
-            elif cur.val > val:
-                cur = cur.left
+        while True:
+            if cur is None:
+                return None
+            elif val < root.val:
+                root = root.left
+            elif val > root.val:
+                root = root.right
             else:
-                cur = cur.right
-        return cur
+                assert(root.val == val)
+                return root

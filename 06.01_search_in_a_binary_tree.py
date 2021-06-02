@@ -2,8 +2,7 @@
 class Solution:
     
     # recursive
-    # space complexity - Θ(height(root)) average, O(nodes(root)) worst
-    # time complexity  - Θ(log(nodes(root))) average, O(nodes(root)) worst
+    # space and time complexity - O(height(root))
     def searchBST(self, root: TreeNode, val: int) -> TreeNode:
         if root is None:
             return None
@@ -18,7 +17,7 @@ class Solution:
     
     # iterative
     # space complexity - O(1)
-    # time complexity  - Θ(log(nodes(root))) average, O(nodes(root)) worst
+    # time complexity  - O(height(root))
     def searchBST2(self, root: TreeNode, val: int) -> TreeNode:
         cur = root
         while cur:

@@ -7,12 +7,14 @@ class Solution:
     def searchBST(self, root: TreeNode, val: int) -> TreeNode:
         if root is None:
             return None
-        if root.val == val:
-            return root
         elif root.val < val:
             return self.searchBST(root.right, val)
-        else:
+        elif root.val > val:
             return self.searchBST(root.left, val)
+        # checking val in the end reduces the number of comparisons
+        else:
+            assert(root.val == val)
+            return root
     
     # iterative
     # space complexity - O(1)

@@ -2,9 +2,9 @@
 class Solution:
     
     # recursive
-    # space and time complexity - O(min(height(p), height(q)))
+    # space and time complexity - O(nodes(root))
     def isSymmetric(self, root: TreeNode) -> bool:
-        return self.helper(root, root)
+        return root is None or self.helper(root, root)
     
     def helper(self, p: TreeNode, q: TreeNode) -> bool:
         if p is None and q is None:
@@ -16,7 +16,7 @@ class Solution:
             self.helper(p.right, q.left)
     
     # iterative
-    # space and time complexity - O(min(height(p), height(q)))
+    # space and time complexity - O(nodes(root))
     def isSymmetric2(self, root: TreeNode) -> bool:
         stack = [(root, root)]
         while stack:

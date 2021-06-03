@@ -1,1 +1,1 @@
-# Leetcode problems on Trees
+# LeetCode problems on Trees

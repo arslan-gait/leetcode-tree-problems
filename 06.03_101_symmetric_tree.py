@@ -19,7 +19,9 @@ class Solution:
     # iterative
     # space and time complexity - O(nodes(root))
     def isSymmetric2(self, root: TreeNode) -> bool:
-        stack = [(root, root)]
+        if root is None:
+            return True
+        stack = [(root.left, root.right)]
         while stack:
             first, second = stack.pop()
             if first is None and second is None:

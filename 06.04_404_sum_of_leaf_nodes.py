@@ -12,8 +12,11 @@ class Solution:
     def helper(self, root: TreeNode, isLeft: bool) -> int:
         if root is None:
             return 0
-        elif root.left is None and root.right is None and isLeft:
-            return root.val
+        elif root.left is None and root.right is None:
+            if isLeft:            
+                return root.val
+            else:
+                return 0
         
         return self.helper(root.left, True) + self.helper(root.right, False)
 

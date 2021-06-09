@@ -21,7 +21,7 @@ class Solution:
     
     
     # iterative
-    # time complexity  - O(nodes(root)) need to traverse every node
+    # time complexity  - O(nodes(root)^2) need to traverse every node * set worst case
     # space complexity - O(nodes(root)) to store visited nodes
     def tree2str2(self, root: TreeNode) -> str:
         if root is None:

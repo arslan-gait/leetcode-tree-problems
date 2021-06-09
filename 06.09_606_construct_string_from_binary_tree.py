@@ -31,11 +31,11 @@ class Solution:
         visited = set()
         while stack:
             cur = stack[-1]
-            if cur in visited:          # O(1)
+            if cur in visited:          # O(N)
                 ans = f'{ans})'
                 stack.pop()
             else:
-                visited.add(cur)        # O(1)
+                visited.add(cur)        # O(N)
                 ans = f'{ans}({cur.val}'
                 if cur.right is not None and cur.left is None:
                     ans = f'{ans}()'

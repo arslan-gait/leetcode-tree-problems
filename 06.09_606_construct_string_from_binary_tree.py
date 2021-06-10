@@ -1,8 +1,8 @@
 # https://leetcode.com/problems/construct-string-from-binary-tree/
 class Solution:
     
-    # recursive
-    # time complexity  - O(nodes(root)) need to traverse every node
+    # recursive - slow
+    # time complexity  - O(nodes(root)^2) need to traverse every node plus string concat
     # space complexity - O(nodes(root)) to store the string
     def tree2str(self, root: TreeNode) -> str:
         if root is None:
@@ -18,6 +18,26 @@ class Solution:
             s = f'{s}({self.tree2str(root.right)})'
             
         return s
+    
+    # recursive
+    # time complexity  - O(nodes(root))
+    # space complexity - O(nodes(root))
+    def tree2str3(self, root: TreeNode) -> str:
+        ans = []
+        def visit(node: TreeNode) -> None: 
+            if node is None:
+                return
+        ans.append(str(node.val))
+        if node.left is not None or node.right is not None:
+            ans.append(’(’)
+            visit(node.left)
+            ans.append(’)’)
+        if node.right is not None: 
+            ans.append(’(’)
+            visit(node.right)
+            ans.append(’)’)
+        visit(root)
+        return ’’.join(ans)
     
     
     # iterative
@@ -44,3 +64,39 @@ class Solution:
                 if cur.left is not None:
                     stack.append(cur.left)
         return ans[1:-1]
+    
+    # iterative
+    # time complexity  - O(nodes(root))
+    # space complexity - O(nodes(root))
+    def tree2str(self, root: TreeNode) -> str:
+        from enum import Enum, auto        
+        class State(Enum):
+            NOT_VISITED = auto()
+            LEFT_VISITED = auto()
+            RIGHT_VISITED = auto()
+            
+        ans = []
+        toVisit = [(root, State.NOT_VISITED)]
+        while len(toVisit) > 0:
+            node, state = toVisit.pop()
+            if state is State.NOT_VISITED:
+                ans.append(str(node.val))
+                if node.left is not None:
+                    ans.append('(')
+                    toVisit.append((node, State.LEFT_VISITED))
+                    toVisit.append((node.left, State.NOT_VISITED))
+                elif node.right is not None:
+                    ans.append('()(')
+                    toVisit.append((node, State.RIGHT_VISITED))
+                    toVisit.append((node.right, State.NOT_VISITED))
+            elif state is State.LEFT_VISITED:
+                ans.append(')')
+                if node.right is not None:
+                    ans.append('(')
+                    toVisit.append((node, State.RIGHT_VISITED))
+                    toVisit.append((node.right, State.NOT_VISITED))
+            else:
+                assert(state is State.RIGHT_VISITED)
+                ans.append(')')
+        return ''.join(ans)
+

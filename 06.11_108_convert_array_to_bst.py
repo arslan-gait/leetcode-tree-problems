@@ -2,8 +2,8 @@
 class Solution:
     
     # recursive
-    # time complexity  - O(log(nodes(root)))
-    # space complexity - O(nodes(root)) to store new tree
+    # time complexity  - O(len(nums))
+    # space complexity - O(len(nums)) to store new tree
     def sortedArrayToBST(self, nums: List[int]) -> TreeNode:
 
         def helper(left: int, right: int) -> TreeNode:

@@ -2,7 +2,7 @@
 class Solution:
     
     # iterative
-    # time complexity  - O(max(nodes(root1), nodes(root2)))
+    # time complexity  - O(nodes(root1) + nodes(root2)) - iterate over all nodes
     # space complexity - O(nodes(root1) + nodes(root2)) to store leaf values
     def leafSimilar(self, root1: TreeNode, root2: TreeNode) -> bool:
         def getLeafNodes(root: TreeNode) -> List[int]:

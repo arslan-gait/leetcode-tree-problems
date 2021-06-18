@@ -4,7 +4,7 @@ class Solution:
     # iterative - BFS
     # time complexity  - O(nodes(root))
     # space complexity - O(nodes(root))
-    def averageOfLevels(self, root: TreeNode) -> List[float]:
+    def averageOfLevels1(self, root: TreeNode) -> List[float]:
         ans = []
         curLevel = [root]
         
@@ -25,26 +25,28 @@ class Solution:
         return ans
     
     # recursive - DFS
-    # time complexity  - Theta(nodes(root)) on average, O(nodes(root)^2) worst due to dict operations
+    # time complexity  - O(nodes(root))
     # space complexity - O(height(root))
-    def averageOfLevels2(self, root: TreeNode) -> List[float]:
+    def averageOfLevels(self, root: TreeNode) -> List[float]:
         
-        m = {}
+        levels = []
         
         def dfs(root: TreeNode, level: int):
             if root is None:
                 return
             
-            nonlocal m
+            nonlocal levels
             
-            if level in m:
-                numNodes, nodesVal = m[level]
-                m[level] = (1 + numNodes, root.val + nodesVal)
+            if level < len(levels):
+                nodesNum, nodesSum = levels[level]
+                levels[level] = (1 + nodesNum, root.val + nodesSum)
             else:
-                m[level] = (1, root.val)
+                levels.append((1, root.val))
             
             dfs(root.left, level + 1)
             dfs(root.right, level + 1)
         
-        dfs(root, 1)
-        return [m[k][1]/m[k][0] for k in m]        
+        dfs(root, 0)
+        for i, v in enumerate(levels):
+            levels[i] = v[1]/v[0]
+        return levels

@@ -14,11 +14,10 @@ class Solution:
             
             nonlocal cnt, maxCnt, prev, modes
             
-            if prev != 100_001:
-                if val == prev:
-                    cnt += 1
-                else:
-                    cnt = 1
+            if val == prev:
+                cnt += 1
+            else:
+                cnt = 1
             
             if cnt > maxCnt:
                 maxCnt = cnt
